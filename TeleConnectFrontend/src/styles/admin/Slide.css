@@ -1,0 +1,31 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50; /* Dark blue-grey background */
+    padding: 20px;
+    color: white; /* White text color */
+    position: fixed; /* Fix the sidebar to the left */
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem; /* Header size */
+    margin-bottom: 2rem; /* Spacing below header */
+  }
+  
+  .sidebar ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 20px; /* Spacing between items */
+    font-size: 1.2rem; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px; /* Padding to maintain size */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #34495e; /* Light blue-grey on hover */
+  }
+  

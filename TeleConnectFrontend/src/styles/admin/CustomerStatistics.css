@@ -1,0 +1,77 @@
+.customer-statistics {
+    padding: 5%; /* Padding for all sides */
+    box-sizing: border-box; /* Ensure padding doesn't affect total width/height */
+  }
+  
+  .top-section {
+    display: flex;
+    justify-content: space-between; /* Align boxes evenly */
+    margin-bottom: 20px; /* Space below top section */
+  }
+  
+  .box {
+    flex: 1; /* Allow boxes to grow equally */
+    margin: 0 10px; /* Space between boxes */
+    padding: 20px; /* Inner padding for boxes */
+    background-color: #f1f1f1; /* Light grey background */
+    border-radius: 8px; /* Rounded corners */
+    text-align: center; /* Center text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .label {
+    font-size: 14px; /* Smaller font for labels */
+    color: #333; /* Dark grey color */
+  }
+  
+  .number {
+    font-size: 24px; /* Larger font for numbers */
+    font-weight: bold; /* Bold for emphasis */
+    color: #000; /* Black color for numbers */
+  }
+  
+  .bottom-section {
+    display: flex;
+    justify-content: space-between; /* Align left and right sections */
+  }
+  
+  .left-section {
+    flex: 1; /* Take equal space in the left section */
+    margin-right: 20px; /* Space to the right */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align boxes horizontally */
+    justify-content: center; /* Center align boxes vertically */
+    height: auto; /* Allow height to adjust based on content */
+  }
+  
+  .left-section .box {
+    width: 40%; /* Occupy 40% of the section width */
+    margin: 10px 0; /* Space between boxes */
+    padding: 40px; /* Adjust padding for smaller size */
+    flex: 0 0 auto; /* Prevent boxes from stretching to fill height */
+    height: auto; /* Allow height to adjust based on content */
+    min-height: 40px; /* Optional: Minimum height for better appearance */
+  }
+  
+  .right-section {
+    flex: 1; /* Take equal space in the right section */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align the contents */
+  }
+  
+  .right-section h3 {
+    margin-bottom: 20px; /* Add space below the heading */
+  }
+  
+  @media (max-width: 768px) {
+    .top-section {
+      flex-direction: column; /* Stack boxes vertically on small screens */
+    }
+  
+    .box {
+      margin-bottom: 10px; /* Space below each box */
+    }
+  }
+  

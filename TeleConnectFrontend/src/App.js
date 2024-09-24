@@ -9,8 +9,12 @@ import Dashboard from './components/Dashboard';
 import NewSimPage from './components/NewSimPage';
 import ExistingUserPage from './components/ExistingUserPage';
 import PlanSummary from './components/PlanSummary';
-import AdminLogin from './components/AdminLogin';
-import AdminDashboard from './components/AdminDashboard';
+import AdminLogin from './components/admin/AdminLogin';
+import CustomerStatistics from './components/admin/CustomerStatistics';
+import ActivatedUsers from './components/admin/ActivatedUsers';
+import DeactivatedUsers from './components/admin/DeactivatedUser';
+import Slider from './components/admin/Slider'
+import AdminDashboard from './components/admin/AdminDashboard';
 
 function App() {
   return (
@@ -29,6 +33,7 @@ function App() {
         <Route path="/plan-summary/:plan" element={<PlanSummary />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        
 
 
 

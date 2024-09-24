@@ -1,0 +1,44 @@
+.app {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+}
+
+.sidebar {
+  width: 260px; /* Fixed width for sidebar */
+  background-color: #f4f4f4; /* Sidebar background color */
+  position: fixed; /* Fix the sidebar */
+  height: 100%; /* Full height */
+  overflow-y: auto; /* Enable scrolling if content exceeds viewport */
+  transition: width 0.3s ease; /* Smooth transition for width change */
+}
+
+.main-content {
+  margin-left: 260px; /* Default margin for sidebar width */
+  padding: 20px; /* Add some padding for content */
+  width: calc(100% - 260px); /* Adjust width based on sidebar */
+  height: 100%; /* Full height */
+  background-color: white; /* Main content background */
+  transition: margin-left 0.3s ease; /* Smooth transition for margin change */
+  display: flex; /* Allow content to flex */
+}
+
+/* Media Queries for Main Content */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* Adjust width for smaller sidebar */
+  }
+  .main-content {
+    margin-left: 200px; /* Adjust margin for smaller sidebar */
+    width: calc(100% - 200px); /* Adjust width accordingly */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100px; /* Reduce sidebar width for mobile */
+  }
+  .main-content {
+    margin-left: 100px; /* Adjust margin for mobile */
+    width: calc(100% - 100px); /* Adjust width accordingly */
+  }
+}
