@@ -1,0 +1,55 @@
+.existing-user-page {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 20px;
+    border: 1px solid #ddd; /* Light border similar to new SIM page */
+    border-radius: 8px; /* Consistent border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #ffffff; /* White background for a clean look */
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2c3e50; /* Darker color for headers */
+    margin-bottom: 1rem; /* Spacing below the header */
+  }
+  
+  h3 {
+    color: #34495e; /* Slightly lighter color for subheaders */
+    margin-bottom: 1rem; /* Spacing below subheader */
+  }
+  
+  .plan-selection {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 20px; /* Consistent padding */
+    font-size: 16px;
+    color: white;
+    background-color: #3498db; /* Primary button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for buttons */
+    text-align: center; /* Center text */
+    margin-top: 10px; /* Margin for spacing */
+  }
+  
+  .btn:hover {
+    background-color: #2980b9; /* Darker on hover */
+  }
+  
+  .btn-success {
+    background-color: #2ecc71; /* Green for activate button */
+  }
+  
+  .btn-success:hover {
+    background-color: #27ae60; /* Darker green on hover */
+  }
+  
