@@ -1,0 +1,7 @@
+# Base image
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean install
+EXPOSE 8081
+CMD ["java", "-jar", "target/Teleconnect.jar"]
