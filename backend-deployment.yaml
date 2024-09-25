@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: webapps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend-container
+        image: yourdockerhubusername/teleconnect-backend:latest
+        ports:
+        - containerPort: 8081
+        env:
+        - name: DB_HOST
+          value: "mysql-service"  # Adjust this to your DB service name
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: webapps
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+  type: ClusterIP
