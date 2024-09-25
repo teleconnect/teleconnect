@@ -1,22 +1,24 @@
 version: '3.8'
 services:
   frontend:
-    build: ./frontend
+    image: dakshata20/teleconnect-frontend:latest
     ports:
       - "3000:3000"
     depends_on:
       - backend
+
   backend:
-    build: ./backend
+    image: dakshata20/teleconnect-backend:latest
     ports:
       - "8081:8081"
     environment:
-      - DB_HOST=mysql
-      - DB_USER=root
-      - DB_PASSWORD=admin
-      - DB_NAME=teleconnect
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: admin
+      DB_NAME: teleconnect
     depends_on:
       - mysql
+
   mysql:
     image: mysql:8.0
     environment:
