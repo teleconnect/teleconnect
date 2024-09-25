@@ -1,20 +1,39 @@
 package com.teleconnect.service;
 
-import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class RegistrationOcrService {
 
-    private final ITesseract tesseract;
+    private final Tesseract tesseract;
 
     public RegistrationOcrService() {
         tesseract = new Tesseract();
-        tesseract.setDatapath("C:\\Users\\e031883\\Desktop\\deployyyy\\teleconnect\\TeleconnectBackend\\TeleconnectBackend\\src\\main\\resources\\Tess4J\\tessdata");
+
+        // Get the path to the tessdata directory in the resources folder
+        String resourcePath;
+        try {
+            // Retrieve the URL of the tessdata folder and decode it
+            resourcePath = URLDecoder.decode(
+                RegistrationOcrService.class.getClassLoader().getResource("Tess4J/tessdata").getPath(),
+                StandardCharsets.UTF_8.toString()
+            );
+
+            // Set the Tesseract data path
+            tesseract.setDatapath(new File(resourcePath).getAbsolutePath()); // Use the absolute path directly
+        } catch (Exception e) {
+            // Log and handle any exceptions that occur while retrieving the path
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load Tesseract data path", e);
+        }
+
+        // Set the language for Tesseract
         tesseract.setLanguage("eng");
     }
 
