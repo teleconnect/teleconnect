@@ -175,10 +175,10 @@
               <id>maven-releases</id>
               <url>http://44.204.61.127:8081/repository/maven-releases/</url>
             </repository>
-           <snapshatRepository>
+           <snapshotRepository>
               <id>maven-snapshots</id>
               <url>http://44.204.61.127:8081/repository/maven-snapshots/</url>
-           < /snapshotRepository>
+           </snapshotRepository>
         </distributionManagement>
 
 </project> 
