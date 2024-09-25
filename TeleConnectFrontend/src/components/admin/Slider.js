@@ -15,6 +15,9 @@ const Sidebar = ({ onOptionClick }) => {
         <li onClick={() => onOptionClick("Activated Users")}>
           Activated Users
         </li>
+        <li onClick={() => onOptionClick("Delete Users")}>
+          Delete Users
+        </li>
       </ul>
     </div>
   );

@@ -1,11 +1,16 @@
+
 package com.teleconnect.controller;
 
 import com.teleconnect.model.AdminLoginRequestDTO;
 import com.teleconnect.model.AdminDeleteUserRequestDTO;
+import com.teleconnect.model.AdminDeactivatedUserDTO;
+import com.teleconnect.model.AdminActivatedUserDTO; // New DTO for activated users
 import com.teleconnect.service.AdminLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -32,5 +37,19 @@ public class AdminLoginController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         }
+    }
+
+    // New endpoint for deactivated users
+    @GetMapping("/deactivatedUsers")
+    public ResponseEntity<List<AdminDeactivatedUserDTO>> getDeactivatedUsers() {
+        List<AdminDeactivatedUserDTO> deactivatedUsers = adminLoginService.getDeactivatedUsers();
+        return ResponseEntity.ok(deactivatedUsers);
+    }
+
+    // New endpoint for activated users
+    @GetMapping("/activatedUsers")
+    public ResponseEntity<List<AdminActivatedUserDTO>> getActivatedUsers() {
+        List<AdminActivatedUserDTO> activatedUsers = adminLoginService.getActivatedUsers();
+        return ResponseEntity.ok(activatedUsers);
     }
 }

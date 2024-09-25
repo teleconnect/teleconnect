@@ -4,6 +4,7 @@ import Sidebar from "./Slider"; // Import the Sidebar component
 import ActivatedUsers from "./ActivatedUsers"; // Import ActivatedUsers component
 import DeactivatedUsers from "./DeactivatedUser"; // Import DeactivatedUsers component
 import CustomerStatistics from "./CustomerStatistics"; // Import CustomerStatistics component
+import DeleteUser from "./DeleteUser";
 
 const AdminDashboard = () => {
   const [selectedOption, setSelectedOption] = useState("Customer Statistics");
@@ -15,6 +16,8 @@ const AdminDashboard = () => {
         return <ActivatedUsers />;
       case "Deactivated Users":
         return <DeactivatedUsers />;
+      case "Delete Users":
+        return <DeleteUser />;
       case "Customer Statistics":
       default:
         return <CustomerStatistics />;

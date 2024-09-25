@@ -14,6 +14,8 @@ function Dashboard() {
       navigate('/new-sim'); // Redirect to Get New SIM page
     } else if (option === 'existingSim') {
       navigate('/existing-user'); // Redirect to Existing User page
+    } else if (option === 'rechargePlan') {
+      navigate('/recharge-plan'); // Redirect to Recharge Plan page
     }
   };
 
@@ -30,14 +32,21 @@ function Dashboard() {
           <button onClick={() => handleOptionClick('existingSim')} className="option-btn">
             Already Have a SIM
           </button>
+          <button onClick={() => handleOptionClick('rechargePlan')} className="option-btn">
+            Recharge your Plan
+          </button>
         </div>
 
         {selectedOption && (
           <div className="option-details">
-            {selectedOption === 'newSim' ? (
+            {selectedOption === 'newSim' && (
               <p>You have selected: Get New SIM. Redirecting to the new SIM registration page...</p>
-            ) : (
+            )}
+            {selectedOption === 'existingSim' && (
               <p>You have selected: Already Have a SIM. Redirecting to the activation page...</p>
+            )}
+            {selectedOption === 'rechargePlan' && (
+              <p>You have selected: Recharge your Plan. Redirecting to the recharge plan page...</p>
             )}
           </div>
         )}

@@ -42,3 +42,90 @@
     width: calc(100% - 100px); /* Adjust width accordingly */
   }
 }
+
+/* Delete User Form Styles */
+.delete-user-container {
+  max-width: 450px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.delete-user-container h1 {
+  font-size: 28px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.delete-user-container form {
+  display: flex;
+  flex-direction: column; /* Ensures elements stack vertically */
+  align-items: stretch; /* Makes inputs and button full width */
+}
+
+.delete-user-container label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.delete-user-container input {
+  padding: 12px 15px;
+  margin-bottom: 20px; /* Space between input fields */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.delete-user-container input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}
+
+.delete-user-container button {
+  padding: 12px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #f44336;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Space above the button */
+}
+
+/* Remove margin below the button */
+.delete-user-container button:last-of-type {
+  margin-bottom: 0; /* Ensures no gap below the button */
+}
+
+.delete-user-container button:hover {
+  background-color: #d32f2f;
+}
+
+.delete-user-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-user-container p.success {
+  color: #4caf50;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0; /* Removes gap below success message */
+}
+
+.delete-user-container p.error {
+  color: #f44336;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0; /* Removes gap below error message */
+}

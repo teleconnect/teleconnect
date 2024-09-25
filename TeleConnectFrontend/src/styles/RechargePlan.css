@@ -1,0 +1,55 @@
+.recharge-plan-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recharge-plan-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .recharge-plan-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .recharge-plan-container label {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .recharge-plan-container input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .recharge-plan-container button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .recharge-plan-container button:hover {
+    background-color: #45a049;
+  }
+  
+  .recharge-plan-container p.success {
+    color: #4caf50;
+    text-align: center;
+  }
+  
+  .recharge-plan-container p.error {
+    color: #f44336;
+    text-align: center;
+  }
+  

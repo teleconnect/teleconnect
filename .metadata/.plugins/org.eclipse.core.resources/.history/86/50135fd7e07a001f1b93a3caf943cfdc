@@ -1,0 +1,5 @@
+package com.teleconnect.config;
+
+public class SwaggerConfig {
+
+}

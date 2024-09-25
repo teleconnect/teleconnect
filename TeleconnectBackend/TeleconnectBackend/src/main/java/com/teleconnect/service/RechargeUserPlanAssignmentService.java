@@ -34,56 +34,55 @@ public class RechargeUserPlanAssignmentService {
 
         boolean hasActivated = false;
 
+        // Check if there is an activated entry
         for (UserPlanAssignment assignment : assignments) {
             if ("activated".equalsIgnoreCase(assignment.getPlanStatus())) {
                 hasActivated = true;
-                Timestamp currentValidity = assignment.getValidityStatus();
-
-                if (currentValidity != null) {
-                    Timestamp newValidity = Timestamp.from(Instant.ofEpochMilli(currentValidity.getTime() + 120_000));
-                    assignment.setValidityStatus(newValidity);
-                    assignment.setPlanId(planId); // Update planId
-
-                    try {
-                        userPlanAssignmentRepository.save(assignment);
-                        String emailResponse = sendRechargeSuccessEmail(email, assignment.getMobileNumber(), newValidity);
-                        if (!emailResponse.equals("Email sent successfully")) {
-                            return emailResponse;
-                        }
-                        return "Recharge Successful !! Plan ID updated.";
-                    } catch (DataIntegrityViolationException ex) {
-                        return "Conflict occurred while updating the plan. Please try again.";
-                    }
-                } else {
-                    return "Unable to process the recharge at this moment !!";
+                // Deactivate the current activated entry and update the updatedAt timestamp
+                assignment.setPlanStatus("deactivated");
+                assignment.setUpdatedAt(Timestamp.from(Instant.now())); // Update the updatedAt field
+                try {
+                    userPlanAssignmentRepository.save(assignment);
+                } catch (DataIntegrityViolationException ex) {
+                    return "Conflict occurred while deactivating the current plan. Please try again.";
                 }
+                break;
             }
         }
 
-        // If no activated entries are found, add a new entry
+        // If no activated entries are found, get the latest entry
         if (!hasActivated) {
-            UserPlanAssignment existingAssignment = assignments.get(0);
-            UserPlanAssignment newAssignment = new UserPlanAssignment();
-            newAssignment.setPlanId(planId); // Set new planId
-            newAssignment.setEid(existingAssignment.getEid());
-            newAssignment.setMobileNumber(existingAssignment.getMobileNumber());
-            newAssignment.setEmail(email);
-            newAssignment.setPlanStatus("activated");
-            newAssignment.setValidityStatus(Timestamp.from(Instant.now().plusSeconds(120)));
-
+            UserPlanAssignment latestAssignment = assignments.get(assignments.size() - 1);
+            latestAssignment.setPlanStatus("deactivated");
+            latestAssignment.setUpdatedAt(Timestamp.from(Instant.now())); // Update the updatedAt field
             try {
-                userPlanAssignmentRepository.save(newAssignment);
-                String emailResponse = sendRechargeSuccessEmail(email, newAssignment.getMobileNumber(), newAssignment.getValidityStatus());
-                if (!emailResponse.equals("Email sent successfully")) {
-                    return emailResponse;
-                }
-                return "Mobile Number activated again !! Recharge Successful !";
+                userPlanAssignmentRepository.save(latestAssignment);
             } catch (DataIntegrityViolationException ex) {
-                return "Conflict occurred while creating a new plan. Please try again.";
+                return "Conflict occurred while deactivating the current plan. Please try again.";
             }
         }
 
-        return "Unable to process the recharge at this moment !!";
+        // Add a new activated entry
+        UserPlanAssignment existingAssignment = assignments.get(0);
+        UserPlanAssignment newAssignment = new UserPlanAssignment();
+        newAssignment.setPlanId(planId); // Set new planId
+        newAssignment.setEid(existingAssignment.getEid());
+        newAssignment.setMobileNumber(existingAssignment.getMobileNumber());
+        newAssignment.setEmail(email);
+        newAssignment.setPlanStatus("activated");
+        newAssignment.setValidityStatus(Timestamp.from(Instant.now().plusSeconds(300)));
+        newAssignment.setUpdatedAt(Timestamp.from(Instant.now())); // Set the updatedAt field for the new entry
+
+        try {
+            userPlanAssignmentRepository.save(newAssignment);
+            String emailResponse = sendRechargeSuccessEmail(email, newAssignment.getMobileNumber(), newAssignment.getValidityStatus());
+            if (!emailResponse.equals("Email sent successfully")) {
+                return emailResponse;
+            }
+            return "Recharge Successful !! New Plan Activated.";
+        } catch (DataIntegrityViolationException ex) {
+            return "Conflict occurred while creating a new plan. Please try again.";
+        }
     }
 
     private String sendRechargeSuccessEmail(String toEmail, String mobileNumber, Timestamp validityStatus) {

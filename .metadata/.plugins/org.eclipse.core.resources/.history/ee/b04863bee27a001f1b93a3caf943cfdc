@@ -1,0 +1,27 @@
+package com.teleconnect.model;
+
+public class AdminDeactivatedUserDTO {
+    private String email;
+    private String mobileNumber;
+
+    public AdminDeactivatedUserDTO(String email, String mobileNumber) {
+        this.email = email;
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+}
