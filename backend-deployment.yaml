@@ -1,7 +1,8 @@
+# backend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: backend
   namespace: webapps
 spec:
   replicas: 2
@@ -14,23 +15,23 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend-container
-        image: yourdockerhubusername/teleconnect-backend:latest
-        ports:
-        - containerPort: 8081
-        env:
-        - name: DB_HOST
-          value: "mysql-service"  # Adjust this to your DB service name
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: username
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
+        - name: backend
+          image: dakshata20/teleconnect-backend:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: DB_NAME
+              value: user_registration_portal
+
 ---
 apiVersion: v1
 kind: Service
