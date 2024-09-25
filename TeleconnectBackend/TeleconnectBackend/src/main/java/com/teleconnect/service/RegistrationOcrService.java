@@ -14,7 +14,7 @@ public class RegistrationOcrService {
 
     public RegistrationOcrService() {
         tesseract = new Tesseract();
-        tesseract.setDatapath("C:\\Users\\e031950\\Desktop\\Project_Work\\TeleconnectBackend\\src\\main\\resources\\Tess4J\\tessdata");
+        tesseract.setDatapath("C:\\Users\\e031883\\Desktop\\deployyyy\\teleconnect\\TeleconnectBackend\\TeleconnectBackend\\src\\main\\resources\\Tess4J\\tessdata");
         tesseract.setLanguage("eng");
     }
 

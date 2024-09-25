@@ -22,7 +22,7 @@ const RechargePlan = () => {
         planId,
       };
 
-      const response = await axios.post("http://localhost:8083/api/user/plan/recharge", requestData);
+      const response = await axios.put("http://localhost:8083/api/user/plan/recharge", requestData);
       setMessage(`Recharge successful for ${email} with Plan ID: ${planId}`);
       setEmail('');
       setPlanId('');

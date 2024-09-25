@@ -65,7 +65,7 @@ function NewSimPage() {
         value,  // Pass the request body with the necessary data
         { withCredentials: true }
       );
-      navigate(`/home`);
+      navigate(`/dashboard`);
     } catch (error) {
       console.error('Error assigning plan:', error);
       alert('There was an issue assigning the plan. Please try again.');

@@ -27,7 +27,7 @@ function ExistingUserPage() {
   const handleActivatePlan = async () => {
     if (selectedPlan) {
       try {
-        // Sending a POST request with a request body containing the email and planId
+        // Sending a PUT request with a request body containing the email and planId
         const response = await axios.put(
           `http://localhost:8083/api/user/plan/change`,
           {
@@ -37,11 +37,13 @@ function ExistingUserPage() {
           { withCredentials: true }
         );
 
-        alert(`Plan ${selectedPlan.title} activated successfully!`);
-        navigate(`/home`); // Redirect to plan summary page
+        // Alert the response message directly
+        alert(response.data); // Alert the message received from the backend
+        navigate(`/dashboard`); 
       } catch (error) {
-        console.error('Error changing plan:', error);
-        alert('There was an issue changing the plan. Please try again.');
+        // In case of an error, alert the error message from the response
+        const errorMessage = error.response?.data || 'There was an issue changing the plan. Please try again.';
+        alert(errorMessage); // Alert the user with the error message
       }
     }
   };
@@ -72,7 +74,7 @@ function ExistingUserPage() {
       <h2>Welcome Back!</h2>
       <p>Email: {email}</p>
 
-      <h3>Select a Plan</h3>
+      <h3>Change Plan</h3>
       <div className="plan-selection">
         {plans.map((plan) => (
           <PlanCard

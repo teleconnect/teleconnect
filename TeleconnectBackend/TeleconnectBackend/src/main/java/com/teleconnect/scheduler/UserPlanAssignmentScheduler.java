@@ -25,7 +25,7 @@ public class UserPlanAssignmentScheduler {
 
     private static final Logger logger = Logger.getLogger(UserPlanAssignmentScheduler.class.getName());
 
-    @Scheduled(fixedRate = 3600000) // Runs every minute (60000 milliseconds)
+    @Scheduled(fixedRate = 3600000) // Runs every hour
     public void updatePlanStatus() {
         List<UserPlanAssignment> activatedPlans = userPlanAssignmentRepository.findAllByPlanStatus("activated");
 

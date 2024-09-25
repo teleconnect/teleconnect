@@ -48,7 +48,7 @@ public class UserPlanChangeService {
                 long createdAtTime = assignment.getCreatedAt().getTime();
                 long timeDifference = currentTime - createdAtTime;
 
-                if (timeDifference <= TimeUnit.MINUTES.toMillis(1)) {
+                if (timeDifference <= TimeUnit.MINUTES.toMillis(1440)) {
                     return "Not Eligible to change the Plan"; // Return error message if within one minute
                 }
 
@@ -66,7 +66,6 @@ public class UserPlanChangeService {
                 newAssignment.setPlanStatus("activated");
                 newAssignment.setCreatedAt(new Timestamp(currentTime)); // Set created timestamp
 
-                // Set validity_status to five minutes from now
                 Timestamp validityStatus = new Timestamp(currentTime + TimeUnit.MINUTES.toMillis(43200));
                 newAssignment.setValidityStatus(validityStatus);
 
