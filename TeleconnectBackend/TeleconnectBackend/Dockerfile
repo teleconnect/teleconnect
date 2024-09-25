@@ -4,4 +4,4 @@ WORKDIR /app
 COPY . .
 RUN ./mvnw clean install
 EXPOSE 8081
-CMD ["java", "-jar", "target/Teleconnect.jar"]
+CMD ["java", "-jar", "target/TeleconnectBackend-0.0.1-SNAPSHOT.jar"]
