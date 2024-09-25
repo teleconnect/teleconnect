@@ -1,10 +1,9 @@
-
 package com.teleconnect.controller;
 
-import com.teleconnect.model.AdminLoginRequestDTO;
-import com.teleconnect.model.AdminDeleteUserRequestDTO;
-import com.teleconnect.model.AdminDeactivatedUserDTO;
-import com.teleconnect.model.AdminActivatedUserDTO; // New DTO for activated users
+import com.teleconnect.dto.AdminActivatedUserDTO;
+import com.teleconnect.dto.AdminDeactivatedUserDTO;
+import com.teleconnect.dto.AdminDeleteUserRequestDTO;
+import com.teleconnect.dto.AdminLoginRequestDTO;
 import com.teleconnect.service.AdminLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,3 +52,4 @@ public class AdminLoginController {
         return ResponseEntity.ok(activatedUsers);
     }
 }
+

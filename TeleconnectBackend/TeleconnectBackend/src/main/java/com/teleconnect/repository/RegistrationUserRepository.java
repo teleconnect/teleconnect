@@ -1,8 +1,9 @@
 package com.teleconnect.repository;
 
-import com.teleconnect.model.RegistrationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.teleconnect.entity.RegistrationUser;
 
 @Repository
 public interface RegistrationUserRepository extends JpaRepository<RegistrationUser, Long> {

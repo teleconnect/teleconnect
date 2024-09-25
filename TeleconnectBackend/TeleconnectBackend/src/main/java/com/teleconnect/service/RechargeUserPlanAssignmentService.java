@@ -70,7 +70,7 @@ public class RechargeUserPlanAssignmentService {
         newAssignment.setMobileNumber(existingAssignment.getMobileNumber());
         newAssignment.setEmail(email);
         newAssignment.setPlanStatus("activated");
-        newAssignment.setValidityStatus(Timestamp.from(Instant.now().plusSeconds(300)));
+        newAssignment.setValidityStatus(Timestamp.from(Instant.now().plusSeconds(2592000)));
         newAssignment.setUpdatedAt(Timestamp.from(Instant.now())); // Set the updatedAt field for the new entry
 
         try {

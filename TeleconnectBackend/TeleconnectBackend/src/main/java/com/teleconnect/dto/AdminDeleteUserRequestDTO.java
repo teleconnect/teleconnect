@@ -1,4 +1,4 @@
-package com.teleconnect.model;
+package com.teleconnect.dto;
 
 public class AdminDeleteUserRequestDTO {
     private String email;

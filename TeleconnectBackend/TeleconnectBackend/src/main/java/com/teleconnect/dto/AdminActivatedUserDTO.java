@@ -1,25 +1,15 @@
-package com.teleconnect.model;
+package com.teleconnect.dto;
 
-public class UserInfoDTO {
-    private String firstName;
+public class AdminActivatedUserDTO {
     private String email;
     private String mobileNumber;
 
-    // Constructor
-    public UserInfoDTO(String firstName, String email, String mobileNumber) {
-        this.firstName = firstName;
+    public AdminActivatedUserDTO(String email, String mobileNumber) {
         this.email = email;
         this.mobileNumber = mobileNumber;
     }
 
     // Getters and Setters
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getEmail() {
         return email;

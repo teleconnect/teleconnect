@@ -1,9 +1,9 @@
 package com.teleconnect.controller;
 
-import com.teleconnect.model.RegistrationUser;
-import com.teleconnect.model.RegistrationUserResponse;
-import com.teleconnect.model.RegistrationUserRequestDTO;
-import com.teleconnect.model.UserInfoDTO;
+import com.teleconnect.dto.RegistrationUserRequestDTO;
+import com.teleconnect.dto.UserInfoDTO;
+import com.teleconnect.entity.RegistrationUser;
+import com.teleconnect.response.RegistrationUserResponse;
 import com.teleconnect.service.RegistrationOcrService;
 import com.teleconnect.service.RegistrationUserService;
 import net.sourceforge.tess4j.TesseractException;

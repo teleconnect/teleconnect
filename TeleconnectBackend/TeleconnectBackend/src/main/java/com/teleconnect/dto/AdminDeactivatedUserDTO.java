@@ -1,15 +1,13 @@
-package com.teleconnect.model;
+package com.teleconnect.dto;
 
-public class AdminActivatedUserDTO {
+public class AdminDeactivatedUserDTO {
     private String email;
     private String mobileNumber;
 
-    public AdminActivatedUserDTO(String email, String mobileNumber) {
+    public AdminDeactivatedUserDTO(String email, String mobileNumber) {
         this.email = email;
         this.mobileNumber = mobileNumber;
     }
-
-    // Getters and Setters
 
     public String getEmail() {
         return email;

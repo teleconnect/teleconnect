@@ -1,4 +1,4 @@
-package com.teleconnect.model;
+package com.teleconnect.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

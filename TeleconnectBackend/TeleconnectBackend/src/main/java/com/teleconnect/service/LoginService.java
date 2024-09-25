@@ -1,6 +1,6 @@
 package com.teleconnect.service;
 
-import com.teleconnect.model.RegistrationUser;
+import com.teleconnect.entity.RegistrationUser;
 import com.teleconnect.repository.RegistrationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

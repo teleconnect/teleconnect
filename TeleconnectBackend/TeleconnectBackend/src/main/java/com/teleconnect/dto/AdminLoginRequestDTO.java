@@ -1,4 +1,4 @@
-package com.teleconnect.model;
+package com.teleconnect.dto;
 
 public class AdminLoginRequestDTO {
     private String email;

@@ -1,7 +1,7 @@
 package com.teleconnect.controller;
 
 import com.teleconnect.model.LoginRequest;
-import com.teleconnect.model.LoginResponse;
+import com.teleconnect.response.LoginResponse;
 import com.teleconnect.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

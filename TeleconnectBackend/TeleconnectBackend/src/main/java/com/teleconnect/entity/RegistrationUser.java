@@ -1,4 +1,4 @@
-package com.teleconnect.model;
+package com.teleconnect.entity;
 
 import jakarta.persistence.*;
 

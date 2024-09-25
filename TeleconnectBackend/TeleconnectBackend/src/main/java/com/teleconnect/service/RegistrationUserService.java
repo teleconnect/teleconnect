@@ -1,7 +1,7 @@
 package com.teleconnect.service;
 
-import com.teleconnect.model.RegistrationUser;
-import com.teleconnect.model.UserInfoDTO;
+import com.teleconnect.dto.UserInfoDTO;
+import com.teleconnect.entity.RegistrationUser;
 import com.teleconnect.repository.RegistrationUserRepository;
 import com.teleconnect.repository.EmailVerificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

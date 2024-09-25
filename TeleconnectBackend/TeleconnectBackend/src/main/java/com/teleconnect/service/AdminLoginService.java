@@ -1,11 +1,12 @@
 package com.teleconnect.service;
 
+import com.teleconnect.dto.AdminActivatedUserDTO;
+import com.teleconnect.dto.AdminDeactivatedUserDTO;
 import com.teleconnect.entity.AdminLogin;
 import com.teleconnect.entity.UserPlanAssignment;
-import com.teleconnect.model.AdminActivatedUserDTO;
-import com.teleconnect.model.AdminDeactivatedUserDTO; // Import the new DTO
 import com.teleconnect.repository.AdminLoginRepository;
 import com.teleconnect.repository.UserPlanAssignmentRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,24 @@ public class AdminLoginService {
 
     private static final String KEY = "TELECONNECTBYPUNETELSTRA"; // AES Key
 
+    // Insert admin credentials on service initialization
+    @PostConstruct
+    public void insertAdminLogin() {
+        if (adminLoginRepository.findByEmail("admin@telstra.com") == null) {
+            AdminLogin adminLogin = new AdminLogin();
+            adminLogin.setEmail("admin@telstra.com");
+            adminLogin.setPassword("8zO8IbfXiyKBRl0RwwB4RQ=="); // Assuming encrypted password
+            adminLoginRepository.save(adminLogin);
+        }
+    }
+
     public String login(String email, String password) {
         AdminLogin admin = adminLoginRepository.findByEmail(email);
-        
+
         if (admin != null && decrypt(admin.getPassword()).equals(password)) {
             return "Login successful!";
         }
-        
+
         throw new RuntimeException("Invalid email or password.");
     }
 
@@ -50,62 +62,45 @@ public class AdminLoginService {
     }
 
     public List<AdminDeactivatedUserDTO> getDeactivatedUsers() {
-        // Fetch all users
         List<UserPlanAssignment> allUsers = userPlanAssignmentRepository.findAll();
-        
-        // Create a map to track emails and their status
         Map<String, String> emailStatusMap = new HashMap<>();
 
-        // Populate the map with email and plan status
         for (UserPlanAssignment user : allUsers) {
             emailStatusMap.put(user.getEmail(), user.getPlanStatus());
         }
 
-        // Filter out emails with "activated" status
-        List<AdminDeactivatedUserDTO> deactivatedUsers = emailStatusMap.entrySet().stream()
-            .filter(entry -> entry.getValue().equals("deactivated")) // Include only deactivated
+        return emailStatusMap.entrySet().stream()
+            .filter(entry -> entry.getValue().equals("deactivated"))
             .map(entry -> {
-                String email = entry.getKey();
-                // Find the mobile number for the deactivated users
                 UserPlanAssignment user = allUsers.stream()
-                        .filter(u -> u.getEmail().equals(email))
+                        .filter(u -> u.getEmail().equals(entry.getKey()))
                         .findFirst()
                         .orElse(null);
-                return user != null ? new AdminDeactivatedUserDTO(email, user.getMobileNumber()) : null;
+                return user != null ? new AdminDeactivatedUserDTO(entry.getKey(), user.getMobileNumber()) : null;
             })
-            .filter(dto -> dto != null) // Filter out any null values
+            .filter(dto -> dto != null)
             .collect(Collectors.toList());
-
-        return deactivatedUsers;
     }
+
     public List<AdminActivatedUserDTO> getActivatedUsers() {
-        // Fetch all users
         List<UserPlanAssignment> allUsers = userPlanAssignmentRepository.findAll();
-        
-        // Create a map to track emails and their status
         Map<String, String> emailStatusMap = new HashMap<>();
 
-        // Populate the map with email and plan status
         for (UserPlanAssignment user : allUsers) {
             emailStatusMap.put(user.getEmail(), user.getPlanStatus());
         }
 
-        // Filter out emails with "deactivated" status
-        List<AdminActivatedUserDTO> activatedUsers = emailStatusMap.entrySet().stream()
-            .filter(entry -> entry.getValue().equals("activated")) // Include only activated
+        return emailStatusMap.entrySet().stream()
+            .filter(entry -> entry.getValue().equals("activated"))
             .map(entry -> {
-                String email = entry.getKey();
-                // Find the mobile number for the activated users
                 UserPlanAssignment user = allUsers.stream()
-                        .filter(u -> u.getEmail().equals(email))
+                        .filter(u -> u.getEmail().equals(entry.getKey()))
                         .findFirst()
                         .orElse(null);
-                return user != null ? new AdminActivatedUserDTO(email, user.getMobileNumber()) : null;
+                return user != null ? new AdminActivatedUserDTO(entry.getKey(), user.getMobileNumber()) : null;
             })
-            .filter(dto -> dto != null) // Filter out any null values
+            .filter(dto -> dto != null)
             .collect(Collectors.toList());
-
-        return activatedUsers;
     }
 
     private String decrypt(String encryptedPassword) {

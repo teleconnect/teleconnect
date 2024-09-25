@@ -76,7 +76,7 @@ public class UserPlanAssignmentService {
         newAssignment.setPlanStatus("activated");
 
         // Set validity_status to 2 minutes from now
-        Timestamp validityTimestamp = new Timestamp(System.currentTimeMillis() + 5 * 60 * 1000);
+        Timestamp validityTimestamp = new Timestamp(System.currentTimeMillis() + 43200 * 60 * 1000);
         newAssignment.setValidityStatus(validityTimestamp);
 
         // Save the new assignment

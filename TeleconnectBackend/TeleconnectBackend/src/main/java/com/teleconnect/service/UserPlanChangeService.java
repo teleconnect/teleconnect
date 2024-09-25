@@ -67,7 +67,7 @@ public class UserPlanChangeService {
                 newAssignment.setCreatedAt(new Timestamp(currentTime)); // Set created timestamp
 
                 // Set validity_status to five minutes from now
-                Timestamp validityStatus = new Timestamp(currentTime + TimeUnit.MINUTES.toMillis(5));
+                Timestamp validityStatus = new Timestamp(currentTime + TimeUnit.MINUTES.toMillis(43200));
                 newAssignment.setValidityStatus(validityStatus);
 
                 userPlanAssignmentRepository.save(newAssignment); // Save the new entry

@@ -1,16 +1,16 @@
-package com.teleconnect.model;
+package com.teleconnect.response;
 
-public class LoginResponse {
+public class RegistrationUserResponse {
 
     private String status;
     private String message;
 
     // Default constructor
-    public LoginResponse() {
+    public RegistrationUserResponse() {
     }
 
     // Constructor with parameters
-    public LoginResponse(String status, String message) {
+    public RegistrationUserResponse(String status, String message) {
         this.status = status;
         this.message = message;
     }
