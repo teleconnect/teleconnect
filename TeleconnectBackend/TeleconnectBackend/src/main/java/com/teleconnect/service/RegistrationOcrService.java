@@ -16,7 +16,8 @@ public class RegistrationOcrService {
     public RegistrationOcrService() {
         tesseract = new Tesseract();
 
-        tesseract.setDatapath("C:\\Users\\e031885\\OneDrive - Telstra\\Desktop\\FinalProject\\TeleconnectBackend\\TeleconnectBackend\\src\\main\\resources\\Tess4J\\tessdata");
+        tesseract.setDatapath("src/main/resources/Tess4J/tessdata");
+
 
         // Get the path to the tessdata directory in the resources folder
         String resourcePath;
