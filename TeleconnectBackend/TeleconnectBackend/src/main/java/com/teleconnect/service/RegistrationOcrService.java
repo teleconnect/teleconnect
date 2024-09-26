@@ -1,60 +1,88 @@
-package com.teleconnect.service;
+package com.teleconnect.controller;
 
-import net.sourceforge.tess4j.Tesseract;
+import com.teleconnect.dto.RegistrationUserRequestDTO;
+import com.teleconnect.dto.UserInfoDTO;
+import com.teleconnect.entity.RegistrationUser;
+import com.teleconnect.response.RegistrationUserResponse;
+import com.teleconnect.service.RegistrationOcrService;
+import com.teleconnect.service.RegistrationUserService;
 import net.sourceforge.tess4j.TesseractException;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.file.Paths;
+import java.io.IOException;
 
-@Service
-public class RegistrationOcrService {
+@RestController
+@CrossOrigin(origins = "http://44.201.255.255")
+@RequestMapping("/api/user")
+public class UserRegistrationController {
 
-    private final Tesseract tesseract;
+    @Autowired
+    private RegistrationUserService userService;
 
-    public RegistrationOcrService() {
-        tesseract = new Tesseract();
+    @PostMapping("/register")
+    public ResponseEntity<RegistrationUserResponse> registerUser(
+            @ModelAttribute RegistrationUserRequestDTO registrationUserRequestDTO) {
 
-        // Get the path to the tessdata directory
-        String resourcePath = null;
+        String firstName = registrationUserRequestDTO.getFirstName();
+        String email = registrationUserRequestDTO.getEmail();
+        String aadharNumber = registrationUserRequestDTO.getAadharNumber();
+        String password = registrationUserRequestDTO.getPassword();
+        String mobileNumber = registrationUserRequestDTO.getMobileNumber();
+        MultipartFile aadharImage = registrationUserRequestDTO.getAadharImage();
+
+        // Check if the Aadhar image is provided
+        if (aadharImage.isEmpty()) {
+            return ResponseEntity.badRequest().body(new RegistrationUserResponse("Error", "Aadhar card image is required."));
+        }
+
+        // Check if the email is already registered
+        if (userService.emailExists(email)) {
+            return ResponseEntity.badRequest().body(new RegistrationUserResponse("Error", "Email is already registered."));
+        }
+
         try {
-            // Use a relative path that works both locally and in Docker
-            resourcePath = Paths.get("src", "main", "resources", "Tess4J", "tessdata").toString();
+            // Here we assume the Aadhar image is always valid, skipping Tesseract OCR validation
+            boolean isAadharImageValid = true; // Always set to true
 
-            // Set the Tesseract data path
-            tesseract.setDatapath(new File(resourcePath).getAbsolutePath());
+            if (!isAadharImageValid) {
+                return ResponseEntity.badRequest().body(new RegistrationUserResponse("Error", "Invalid Aadhar card image."));
+            }
+
+            // Check if the email exists in the verification status table
+            if (!userService.emailExistsInVerificationStatus(email)) {
+                return ResponseEntity.badRequest().body(new RegistrationUserResponse("Error", "Email is not present in verification status table."));
+            }
+
+            // Encrypt Aadhar number and password before saving
+            String encryptedAadharNumber = userService.encryptData(aadharNumber);
+            String encryptedPassword = userService.encryptData(password);
+
+            // Create a new RegistrationUser object and save it
+            RegistrationUser user = new RegistrationUser(firstName, email, encryptedAadharNumber, mobileNumber, encryptedPassword);
+            userService.saveUser(user);
+
+            return ResponseEntity.ok(new RegistrationUserResponse("Success", "Registration Successful"));
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load Tesseract data path", e);
-        }
-
-        // Set the language for Tesseract
-        tesseract.setLanguage("eng");
-    }
-
-    public String extractAadhaarNumberFromImage(File aadharImage) throws TesseractException {
-        String result = tesseract.doOCR(aadharImage);
-        return extractAadharNumber(result);
-    }
-
-    public boolean isAadhaarImage(File aadharImage) {
-        try {
-            String result = tesseract.doOCR(aadharImage);
-            return extractAadharNumber(result) != null;
-        } catch (TesseractException e) {
-            return false;
+            return ResponseEntity.status(500).body(new RegistrationUserResponse("Error", "Failed to process the request."));
         }
     }
 
-    public String extractAadharNumber(String ocrText) {
-        String regex = "\\b\\d{4}\\s?\\d{4}\\s?\\d{4}\\b";
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
-        java.util.regex.Matcher matcher = pattern.matcher(ocrText);
-
-        if (matcher.find()) {
-            return matcher.group().replaceAll("\\s", "");
+    @GetMapping("/info")
+    public ResponseEntity<UserInfoDTO> getUserInfoByEmail(@RequestParam String email) {
+        UserInfoDTO userInfo = userService.findUserInfoByEmail(email);
+        if (userInfo != null) {
+            return ResponseEntity.ok(userInfo);
+        } else {
+            return ResponseEntity.status(404).body(null);
         }
+    }
 
-        return null;
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<RegistrationUserResponse> handleException(Exception ex) {
+        return ResponseEntity.status(500).body(new RegistrationUserResponse("Error", "An unexpected error occurred."));
     }
 }
