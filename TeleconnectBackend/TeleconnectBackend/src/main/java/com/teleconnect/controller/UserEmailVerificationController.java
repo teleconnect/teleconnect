@@ -10,6 +10,7 @@ import com.teleconnect.service.EmailVerificationService;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
+@CrossOrigin(origins = "http://44.201.255.255")
 @RequestMapping("/api/user/verification")
 public class UserEmailVerificationController {
 
