@@ -65,7 +65,7 @@ function NewSimPage() {
         value,  // Pass the request body with the necessary data
         { withCredentials: true }
       );
-      console.log(reponse.data);
+     
       alert('Plan assigned successfully.');
       navigate(`/home`);
     } catch (error) {
