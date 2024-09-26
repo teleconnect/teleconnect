@@ -1,32 +1,65 @@
 package com.teleconnect.service;
-
+ 
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
-
+ 
 import java.io.File;
-
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+ 
 @Service
 public class RegistrationOcrService {
-
-    // Constructor
+ 
+    private final Tesseract tesseract;
+ 
     public RegistrationOcrService() {
-        // No initialization needed for Tesseract
+        tesseract = new Tesseract();
+ 
+        // Get the path to the tessdata directory in the resources folder
+        String resourcePath;
+        try {
+            // Retrieve the URL of the tessdata folder and decode it
+            resourcePath = URLDecoder.decode(
+                RegistrationOcrService.class.getClassLoader().getResource("Tess4J/tessdata").getPath(),
+                StandardCharsets.UTF_8.toString()
+            );
+ 
+            // Set the Tesseract data path
+            tesseract.setDatapath(new File(resourcePath).getAbsolutePath()); // Use the absolute path directly
+        } catch (Exception e) {
+            // Log and handle any exceptions that occur while retrieving the path
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load Tesseract data path", e);
+        }
+ 
+        // Set the language for Tesseract
+        tesseract.setLanguage("eng");
     }
-
-    // Method to extract Aadhaar number from an image
-    public boolean extractAadhaarNumberFromImage(File aadharImage) {
-        // Return true without performing any logic
-        return true;
+ 
+    public String extractAadhaarNumberFromImage(File aadharImage) throws TesseractException {
+        String result = tesseract.doOCR(aadharImage);
+        return extractAadharNumber(result);
     }
-
-    // Method to check if an image is an Aadhaar image
+ 
     public boolean isAadhaarImage(File aadharImage) {
-        // Return true without performing any logic
-        return true;
+        try {
+            String result = tesseract.doOCR(aadharImage);
+            return extractAadharNumber(result) != null;
+        } catch (TesseractException e) {
+            return false;
+        }
     }
-
-    // Method to extract Aadhaar number from OCR text
-    public boolean extractAadharNumber(String ocrText) {
-        // Return true without performing any logic
-        return true;
+ 
+    public String extractAadharNumber(String ocrText) {
+        String regex = "\\b\\d{4}\\s?\\d{4}\\s?\\d{4}\\b";
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+        java.util.regex.Matcher matcher = pattern.matcher(ocrText);
+ 
+        if (matcher.find()) {
+            return matcher.group().replaceAll("\\s", "");
+        }
+ 
+        return null;
     }
 }
