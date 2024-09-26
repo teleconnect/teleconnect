@@ -1,0 +1,75 @@
+/* Styles for the DeleteUser component */
+
+.whole {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: white;
+    margin-left: 35%; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+    box-sizing: border-box; /* Box model fix */
+}
+
+.delete-user-container {
+    background-color: white; /* White background for the form container */
+    padding: 2rem; /* Padding around the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Maximum width of the container */
+}
+
+.delete-user-container h1 {
+    text-align: center; /* Center the title */
+    margin-bottom: 1.5rem; /* Space below the title */
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Space below each form group */
+}
+
+.form-group label {
+    display: block; /* Label as block element */
+    margin-bottom: 0.5rem; /* Space below the label */
+    font-weight: bold; /* Bold label */
+    font-size: x-large;
+}
+
+.form-group input {
+    width: 100%; /* Full width input */
+    padding: 0.5rem; /* Padding inside the input */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}
+
+button {
+    width: 100%; /* Full width button */
+    padding: 0.75rem; /* Padding inside the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Primary button color */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    font-size: xx-large;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:disabled {
+    background-color: #6c757d; /* Disabled button color */
+    cursor: not-allowed; /* Not-allowed cursor on disabled */
+}
+
+button:hover:not(:disabled) {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
+.success {
+    color: green; /* Green color for success messages */
+    text-align: center; /* Center text for success messages */
+}
+
+.error {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center text for error messages */
+}
