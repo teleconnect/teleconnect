@@ -18,7 +18,7 @@ const EmailVerification = () => {
   const handleSendOtp = async () => {
     try {
       console.log('Sending email:', email); // Debugging line
-      await axios.post('http://localhost:8083/api/user/verification/email', 
+      await axios.post('http://44.201.255.255:8081/api/user/verification/email', 
         { email }, 
         {
           headers: {
@@ -50,7 +50,7 @@ const EmailVerification = () => {
 const handleVerifyOtp = async () => {
   try {
     // Send the OTP as a query parameter
-    await axios.post('http://localhost:8083/api/user/verification/otp', 
+    await axios.post('http://44.201.255.255:8081/api/user/verification/otp', 
       { otp }, 
       {
         headers: {
