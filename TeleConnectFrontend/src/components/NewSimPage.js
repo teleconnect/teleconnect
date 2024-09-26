@@ -65,7 +65,7 @@ function NewSimPage() {
         value,  // Pass the request body with the necessary data
         { withCredentials: true }
       );
-      alert(`Plan ${selectedPlan.title} has been successfully assigned.`);
+      alert(response.data);
       navigate(`/home`);
     } catch (error) {
       console.error('Error assigning plan:', error);
