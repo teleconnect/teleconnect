@@ -12,10 +12,9 @@ services:
     ports:
       - "8081:8081"
     environment:
-      DB_HOST: mysql
-      DB_USER: root
-      DB_PASSWORD: admin
-      DB_NAME: teleconnect
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/user_registration_portal?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
     depends_on:
       - mysql
 
@@ -26,4 +25,3 @@ services:
       MYSQL_DATABASE: user_registration_portal
     ports:
       - "3306:3306"
-   
