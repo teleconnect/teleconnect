@@ -61,11 +61,11 @@ function Register() {
       });
 
       console.log(response.data);
-      alert('Registration successful');
+      alert(response.data);
       navigate('/login');
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Registration failed');
+      alert(response.data);
     }
   };
 
