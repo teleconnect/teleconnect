@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://44.201.255.255")
 @RequestMapping("/api/admin")
 public class AdminDashboardController {
 
