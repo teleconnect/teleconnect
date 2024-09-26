@@ -54,7 +54,7 @@ function Register() {
       formData.append('aadharNumber', aadharNumber.trim()); // Correct name matching DTO
       formData.append('aadharImage', aadharImage); // Correct name matching DTO
 
-      const response = await axios.post('http://localhost:8083/api/user/register', formData, {
+      const response = await axios.post('http://44.201.255.255:8081/api/user/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

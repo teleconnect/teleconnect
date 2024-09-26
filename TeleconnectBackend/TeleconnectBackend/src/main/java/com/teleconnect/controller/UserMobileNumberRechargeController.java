@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://44.201.255.255")
 @RequestMapping("/api/user/plan")
 public class UserMobileNumberRechargeController {
 

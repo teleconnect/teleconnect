@@ -8,7 +8,6 @@ import EmailVerification from './components/EmailVerification';
 import Dashboard from './components/Dashboard';
 import NewSimPage from './components/NewSimPage';
 import ExistingUserPage from './components/ExistingUserPage';
-import PlanSummary from './components/PlanSummary';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import RechargePlan from './components/RechargePlan';
@@ -28,8 +27,7 @@ function App() {
           <Route path="/new-sim" element={<NewSimPage />} />
         <Route path="/existing-user" element={<ExistingUserPage />} />
         <Route path="/recharge-plan" element={<RechargePlan />} />
-        <Route path="/plan-summary/:plan" element={<PlanSummary />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         
 
