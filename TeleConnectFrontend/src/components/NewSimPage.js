@@ -65,11 +65,11 @@ function NewSimPage() {
         value,  // Pass the request body with the necessary data
         { withCredentials: true }
       );
-      alert(response.data);
+      alert('Plan assigned successfully.');
       navigate(`/home`);
     } catch (error) {
       console.error('Error assigning plan:', error);
-      alert(response.data);
+      alert('There was an issue assigning the plan. Please try again.');
     }
   };
 
