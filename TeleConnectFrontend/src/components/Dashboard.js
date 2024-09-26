@@ -30,7 +30,7 @@ function Dashboard() {
             Get New SIM
           </button>
           <button onClick={() => handleOptionClick('existingSim')} className="option-btn">
-            Already Have a SIM
+            Change Plan Type
           </button>
           <button onClick={() => handleOptionClick('rechargePlan')} className="option-btn">
             Recharge your Plan
