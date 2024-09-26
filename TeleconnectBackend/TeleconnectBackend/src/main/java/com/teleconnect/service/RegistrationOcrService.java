@@ -5,8 +5,9 @@ import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
  
 import java.io.File;
-import java.net.URLDecoder;
+import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
+import java.net.URLDecoder;
  
 @Service
 public class RegistrationOcrService {
@@ -16,19 +17,14 @@ public class RegistrationOcrService {
     public RegistrationOcrService() {
         tesseract = new Tesseract();
  
-        // Get the path to the tessdata directory in the resources folder
+        // Get the path to the tessdata directory in the Docker container
         String resourcePath;
         try {
-            // Retrieve the URL of the tessdata folder and decode it
-            resourcePath = URLDecoder.decode(
-                RegistrationOcrService.class.getClassLoader().getResource("Tess4J/tessdata").getPath(),
-                StandardCharsets.UTF_8.toString()
-            );
- 
+            // If running inside Docker, use the absolute path to /app/src/main/resources/Tess4J/tessdata
+            resourcePath = Paths.get("/app/src/main/resources/Tess4J/tessdata").toString();
             // Set the Tesseract data path
-            tesseract.setDatapath(new File(resourcePath).getAbsolutePath()); // Use the absolute path directly
+            tesseract.setDatapath(new File(resourcePath).getAbsolutePath());
         } catch (Exception e) {
-            // Log and handle any exceptions that occur while retrieving the path
             e.printStackTrace();
             throw new RuntimeException("Failed to load Tesseract data path", e);
         }
