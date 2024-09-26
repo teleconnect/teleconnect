@@ -4,14 +4,14 @@ FROM openjdk:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Install Tesseract and dependencies
-RUN apk add --no-cache tesseract-ocr tesseract-ocr-data-eng
-
 # Copy all files into the Docker container
 COPY . .
 
 # Ensure the mvnw script is executable
 RUN chmod +x ./mvnw
+
+# Copy the tessdata directory explicitly (optional step for clarity, as it's already in COPY . .)
+COPY src/main/resources/Tess4J/tessdata /app/src/main/resources/Tess4J/tessdata
 
 # Clean and build the application using Maven
 RUN ./mvnw clean install
