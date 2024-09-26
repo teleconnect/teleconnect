@@ -14,7 +14,7 @@ const AdminLogin = () => {
     const loginData = { email, password };
 
     try {
-      const response = await fetch('http://localhost:8083/api/admin/login', {
+      const response = await fetch('http://44.201.255.255:8081/api/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
