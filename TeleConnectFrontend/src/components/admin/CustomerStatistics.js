@@ -14,7 +14,7 @@ const CustomerStatistics = () => {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await fetch('http://localhost:8083/api/admin/dashboard');
+        const response = await fetch('http://44.201.255.255:8081/api/admin/dashboard');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
