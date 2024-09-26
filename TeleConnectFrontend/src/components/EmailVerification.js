@@ -31,7 +31,7 @@ const EmailVerification = () => {
       console.log("OTP sent successfully.");
       setOtpSent(true);
       setError(null);
-      alert('OTP has been sent to your email!');
+      alert(response.data);
     } catch (err) {
       if (err.response) {
         console.error('Error Response:', err.response.data); // Log the response error
