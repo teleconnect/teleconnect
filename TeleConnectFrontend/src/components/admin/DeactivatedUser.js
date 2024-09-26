@@ -9,7 +9,7 @@ const ActivatedUsers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8083/api/admin/deactivatedUsers")
+      .get("http://44.201.255.255:8081/api/admin/deactivatedUsers")
       .then((response) => {
         setUsers(response.data);
         setLoading(false);
