@@ -15,7 +15,7 @@ const DeleteUser = () => {
     setError(null);
 
     try {
-      await axios.delete("http://localhost:8083/api/admin/delete-user", {
+      await axios.delete("http://44.201.255.255:8081/api/admin/delete-user", {
         data: { email },
       });
       setMessage(`User with email ${email} was deleted successfully.`);
