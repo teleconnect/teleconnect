@@ -69,7 +69,7 @@ function NewSimPage() {
       navigate(`/home`);
     } catch (error) {
       console.error('Error assigning plan:', error);
-      alert('There was an issue assigning the plan. Please try again.');
+      alert(response.data);
     }
   };
 
