@@ -23,13 +23,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link
-                className="nav-link"
-                to="plans-section"
-                smooth={true}
-                duration={500}
-                offset={-70} // Adjust offset to consider the navbar height
-              >
+              <Link className="nav-link" to="/dashboard">
                 Plans
               </Link>
             </li>
