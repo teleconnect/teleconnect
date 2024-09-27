@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-scroll';
 import { Dropdown } from 'react-bootstrap';
 import '../styles/Navbar.css';
 
