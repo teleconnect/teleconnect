@@ -22,12 +22,12 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            // <li className="nav-item">
-            //   {/* Plans link updated to redirect to /dashboard */}
-            //   <a className="nav-link" href="/dashboard">
-            //     Plans
-            //   </a>
-            // </li>
+            <li className="nav-item">
+              {/* Plans link updated to redirect to /dashboard */}
+              <a className="nav-link" href="/dashboard">
+                Plans
+              </a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="/email-verification">Register</a>
             </li>
