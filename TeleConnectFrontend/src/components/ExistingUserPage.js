@@ -39,7 +39,7 @@ function ExistingUserPage() {
 
         // Alert the response message directly
         alert(response.data); // Alert the message received from the backend
-        navigate(`/dashboard`); // Redirect to plan summary page
+        navigate(`/home`); // Redirect to plan summary page
       } catch (error) {
         // In case of an error, alert the error message from the response
         const errorMessage = error.response?.data || 'There was an issue changing the plan. Please try again.';
