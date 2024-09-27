@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-scroll';
 import { Dropdown } from 'react-bootstrap';
 import '../styles/Navbar.css';
 
@@ -23,9 +22,10 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">
+              {/* Plans link updated to redirect to /dashboard */}
+              <a className="nav-link" href="/dashboard">
                 Plans
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/email-verification">Register</a>
